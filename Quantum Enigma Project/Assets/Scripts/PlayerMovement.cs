@@ -6,16 +6,22 @@ public class PlayerMovement : MonoBehaviour
 {
     public CharacterController controller;
     public Transform groundCheck;
-    public float groundDistance = 0.4f;
     public LayerMask groundMask;
+    public AudioSource noteSound;
+    public AudioClip[] noteSoundArray;
+    public AudioSource[] movementSoundArray;
 
     public float speed = 12f;
     public float sprint = 18f;
     public float gravity = -9f;
     public float jump = 3f;
+    public float groundDistance = 0.4f;
 
     Vector3 velocity;
+    AudioSource moveSound;
+    AudioSource jumpSound;
     bool isGrounded;
+    bool isMoving;
     float final_speed;
 
 
@@ -46,26 +52,78 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetKey(KeyCode.LeftShift))
         {
             final_speed = sprint;
+            moveSound = movementSoundArray[1];
             Debug.Log("Sprint");
         }
         else
         {
+            moveSound = movementSoundArray[0];
             final_speed = speed;
         }
 
-        Vector3 move = transform.right * x + transform.forward * z;
+        if (x == 0  && z == 0)
+		{
+            isMoving = false;
+		}
+        else
+		{
+            isMoving = true;
+		}
 
-        controller.Move(move * final_speed * Time.deltaTime);
+        if (isMoving)
+		{ 
+            if (!moveSound.isPlaying)
+			{
+                moveSound.volume = Random.Range(0.3f, 0.4f);
+                moveSound.pitch = Random.Range(0.8f, 1.2f);
+                moveSound.Play();
+            } 
+		}
+        else
+		{
+            moveSound.Stop();
+		}
 
+         Vector3 move = transform.right * x + transform.forward * z;
+         controller.Move(move * final_speed * Time.deltaTime);
+
+
+
+        jumpSound = movementSoundArray[2];
         // Jump
-        if(Input.GetButtonDown("Jump") && isGrounded)
+        if (Input.GetButtonDown("Jump") && isGrounded)
         {
-            velocity.y = Mathf.Sqrt(jump * -2f * gravity);   
+            
+            velocity.y = Mathf.Sqrt(jump * -2f * gravity);
+            jumpSound.volume = Random.Range(0.15f, 0.3f);
+            jumpSound.pitch = Random.Range(0.8f, 1.1f);
+            jumpSound.Play();
             Debug.Log("Jump");
+        }
+        
+        if(!isGrounded)
+		{
+            moveSound.Stop();
         }
 
         velocity.y += gravity * Time.deltaTime;
 
         controller.Move(velocity * Time.deltaTime);
     }
+    void OnTriggerEnter(Collider other)
+    {
+        noteSound.clip = noteSoundArray[Random.Range(0, noteSoundArray.Length)];
+
+        if (other.CompareTag("Note"))
+        {
+            noteSound.volume = Random.Range(0.1f, 0.2f);
+            noteSound.pitch = Random.Range(0.8f, 1.1f);
+            noteSound.Play();
+        }
+        else
+		{
+            noteSound.Stop();
+		}
+    }
+
 }
