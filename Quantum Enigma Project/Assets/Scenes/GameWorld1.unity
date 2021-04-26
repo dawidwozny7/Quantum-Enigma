@@ -3086,7 +3086,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c249560c5721e6746acc77e7770a8263, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursor: {fileID: 384306892}
+  cursor: {fileID: 770965703}
   pauseMenuUI: {fileID: 1024931235}
 --- !u!224 &1408084729 stripped
 RectTransform:
