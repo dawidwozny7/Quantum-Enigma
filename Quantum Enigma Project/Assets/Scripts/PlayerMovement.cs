@@ -72,7 +72,7 @@ public class PlayerMovement : MonoBehaviour
 
         if (isMoving)
 		{ 
-            if (!moveSound.isPlaying)
+            if (!moveSound.isPlaying && moveSound.enabled == true)
 			{
                 moveSound.volume = Random.Range(0.3f, 0.4f);
                 moveSound.pitch = Random.Range(0.8f, 1.2f);
@@ -95,9 +95,12 @@ public class PlayerMovement : MonoBehaviour
         {
             
             velocity.y = Mathf.Sqrt(jump * -2f * gravity);
-            jumpSound.volume = Random.Range(0.15f, 0.3f);
-            jumpSound.pitch = Random.Range(0.8f, 1.1f);
-            jumpSound.Play();
+            if (jumpSound.enabled == true)
+			{
+                jumpSound.volume = Random.Range(0.15f, 0.3f);
+                jumpSound.pitch = Random.Range(0.8f, 1.1f);
+                jumpSound.Play();
+            }
             Debug.Log("Jump");
         }
         
