@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fb844486a393b840ace42340860c196, type: 3}
+  m_Name: mapModifier
+  m_EditorClassIdentifier: 
+  m_ModifiersList:
+  - {fileID: 11400000, guid: 5438cc1b555f3b442bb5b8efe3470934, type: 2}
+  - {fileID: 11400000, guid: eb793982ce89c174ca008be4d9ebe967, type: 2}
+  - {fileID: 11400000, guid: 6c35c68929a6a5442bf73bf73fc23d41, type: 2}
