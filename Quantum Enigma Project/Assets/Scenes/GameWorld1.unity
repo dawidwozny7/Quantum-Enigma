@@ -1067,7 +1067,7 @@ GameObject:
   - component: {fileID: 682741750}
   - component: {fileID: 682741754}
   m_Layer: 0
-  m_Name: Cylinder
+  m_Name: Trigger for MiniGame1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
