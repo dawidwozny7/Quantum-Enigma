@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class BoardManager : MonoBehaviour
 {
-    public Marble[,] Marbles { set; get; }
+    public static BoardManager Instance{set;get;}
+    private bool[,] allowedMoves{set;get;}
+    public Marble[,] Marbles {set;get;}
     private Marble selectedMarble;
 
     private const float TILE_SIZE = 1.0f;
@@ -57,18 +59,21 @@ public class BoardManager : MonoBehaviour
         {
             return;
         }
+        allowedMoves = Marbles[x,y].PossibleMove();
         selectedMarble = Marbles[x, y];
+        BoardHighlights.Instance.HighlightAllowedMoves(allowedMoves);
     }
 
     private void MoveMarble(int x, int y)
     {
-        if(selectedMarble.PossibleMove(x,y))
+        if(allowedMoves[x,y])
         {
             Marbles[selectedMarble.CurrentX, selectedMarble.CurrentY] = null;
             selectedMarble.transform.position = GetTileCenter(x, y);
             Marbles[x, y] = selectedMarble;
             moves_left -= 1;
         }
+        BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
     }
 
@@ -113,21 +118,50 @@ public class BoardManager : MonoBehaviour
         activePiece.Add(go);
     }
 
+
+    /*
+    0 = start tile
+    1 = finish tile
+    2 = lava
+    3 = blockade
+    4 = basic marble
+    5 = entangled marble
+    9 = empty
+    */
+
+        int[,] leveldesign = new int[,]{
+        {9 , 9 , 2 , 9 , 9 , 9 , 0 , 9},
+        {9 , 9 , 9 , 9 , 5 , 9 , 9 , 9},
+        {9 , 9 , 9 , 9 , 9 , 9 , 9 , 5},
+        {9 , 9 , 9 , 9 , 9 , 9 , 9 , 9},
+        {9 , 9 , 9 , 4 , 4 , 9 , 9 , 9},
+        {5 , 9 , 9 , 9 , 9 , 9 , 9 , 9},
+        {9 , 9 , 9 , 9 , 9 , 4 , 9 , 9},
+        {3 , 9 , 1 , 9 , 9 , 9 , 9 , 9}         //left-top = {0,0} --- bottom-right = {7,7}
+    };
     private void SpawnAllLevel()
     {
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
-        SpawnSFTile(0, GetTileSFCenter(0, 6)); //start tile in position (0,6) 
-        SpawnSFTile(1, GetTileSFCenter(7, 2)); //finish tile in position (7,2)
-        SpawnLBTile(2, GetTileCenter(0, 2)); //lava tile in position (0,2)
-        SpawnLBTile(3, GetTileCenter(7, 0)); //blockade in position (7,0)
-        SpawnPiece(4, 4, 3); //basic marble in position (4,3)
-        SpawnPiece(4, 4, 4); //basic marble in position (4,4)
-        SpawnPiece(4, 6, 5); //basic marble in position (6,5)
-        SpawnPiece(5, 1, 3); //entangled marble in position (1,3)
-        SpawnPiece(5, 5, 0); //entangled marble in position (5,0)
-        SpawnPiece(5, 2, 7); //entangled marble in position (2,7)
-
+        int itx = 0;
+        int ity = 0;
+        foreach (int obj in leveldesign)
+        {
+            if((obj==0)||(obj==1)){
+                SpawnSFTile(obj, GetTileSFCenter(itx , ity+1));
+            }
+            else if((obj==2)||(obj==3)){
+                SpawnLBTile(obj, GetTileCenter(itx, ity));
+            }
+            else if((obj==4)||(obj==5)){
+                SpawnPiece(obj, itx, ity);
+            }
+            itx +=1;
+            if (itx%8 == 0){
+                ity+=1;
+                itx = 0;
+            }
+        }
     }
 
     private Vector3 GetTileCenter(int x, int y)
