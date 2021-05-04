@@ -10,7 +10,7 @@ public class BasicMarble : Marble
        bool[,] r = new bool[8,8];
 
        i= CurrentX-1;
-       j=CurrentY+1;
+       j= CurrentY+1;
        if(CurrentY != 7){
            for (int k = 0; k < 3; k++)
            {
