@@ -15,8 +15,8 @@ public abstract class Marble : MonoBehaviour
         CurrentY = y;
     }
 
-    public virtual bool PossibleMove(int x, int y)
+    public virtual bool[,] PossibleMove()
     {
-        return true;
+        return new bool[8,8];
     }
 }
