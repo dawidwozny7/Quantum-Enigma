@@ -4,19 +4,18 @@ using UnityEngine;
 
 public class EntangledMarble : Marble
 {
-    public override bool[,] PossibleMove() // Just for testing purposes added the same logic as for basic marble
+    public override bool[,] PossibleMove()
     {
         int i, j;
         Marble c = null;
         bool[,] r = new bool[8, 8];
-
         i = CurrentX - 1;
         j = CurrentY + 1;
         if (CurrentY != 7)
         {
             for (int k = 0; k < 3; k++)
             {
-                if (i >= 0 || i < 8)
+                if (i >= 0 && i < 8 && j >= 0 && j < 8)
                 {
                     if (BoardManager.Instance.Marbles[i, j] != null)
                     {
@@ -37,7 +36,7 @@ public class EntangledMarble : Marble
         {
             for (int k = 0; k < 3; k++)
             {
-                if (i >= 0 || i < 8)
+                if (i >= 0 && i < 8 && j >= 0 && j < 8)
                 {
                     if (BoardManager.Instance.Marbles[i, j] != null)
                     {
@@ -64,7 +63,7 @@ public class EntangledMarble : Marble
 
             }
         }
-        if (CurrentX != 0)
+        if (CurrentX != 7)
         {
             if (BoardManager.Instance.Marbles[CurrentX + 1, CurrentY] != null)
             {
@@ -79,4 +78,5 @@ public class EntangledMarble : Marble
 
         return r;
     }
+
 }

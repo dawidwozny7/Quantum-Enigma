@@ -23,6 +23,12 @@ public class BoardManager : MonoBehaviour
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
 
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         SpawnAllLevel();
