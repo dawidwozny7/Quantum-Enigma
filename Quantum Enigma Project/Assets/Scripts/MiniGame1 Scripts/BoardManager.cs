@@ -23,6 +23,12 @@ public class BoardManager : MonoBehaviour
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
 
+    
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     private void Start()
     {
         SpawnAllLevel();
@@ -129,15 +135,15 @@ public class BoardManager : MonoBehaviour
     9 = empty
     */
 
-        int[,] leveldesign = new int[,]{
-        {9 , 9 , 2 , 9 , 9 , 9 , 0 , 9},
+        int[,] leveldesign = new int[,]{       //visualization here correlates to visualization in the game
+        {9 , 9 , 2 , 9 , 9 , 9 , 0 , 9},       //left-top = {0,7} --- right-top = {7,7}
         {9 , 9 , 9 , 9 , 5 , 9 , 9 , 9},
         {9 , 9 , 9 , 9 , 9 , 9 , 9 , 5},
         {9 , 9 , 9 , 9 , 9 , 9 , 9 , 9},
         {9 , 9 , 9 , 4 , 4 , 9 , 9 , 9},
         {5 , 9 , 9 , 9 , 9 , 9 , 9 , 9},
         {9 , 9 , 9 , 9 , 9 , 4 , 9 , 9},
-        {3 , 9 , 1 , 9 , 9 , 9 , 9 , 9}         //left-top = {0,0} --- bottom-right = {7,7}
+        {3 , 9 , 1 , 9 , 9 , 9 , 9 , 9}         //left-bottom = {0,0} --- bottom-right = {7,0}
     };
     private void SpawnAllLevel()
     {
@@ -148,13 +154,13 @@ public class BoardManager : MonoBehaviour
         foreach (int obj in leveldesign)
         {
             if((obj==0)||(obj==1)){
-                SpawnSFTile(obj, GetTileSFCenter(itx , ity+1));
+                SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
             }
             else if((obj==2)||(obj==3)){
-                SpawnLBTile(obj, GetTileCenter(itx, ity));
+                SpawnLBTile(obj, GetTileCenter(itx,7- ity));
             }
             else if((obj==4)||(obj==5)){
-                SpawnPiece(obj, itx, ity);
+                SpawnPiece(obj,itx,7- ity);
             }
             itx +=1;
             if (itx%8 == 0){
