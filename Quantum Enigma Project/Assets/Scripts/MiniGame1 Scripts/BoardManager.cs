@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+using System.Linq;
 
 public class BoardManager : MonoBehaviour
 {
@@ -171,7 +174,7 @@ public class BoardManager : MonoBehaviour
     9 = empty
     */
 
-        int[,] leveldesign = new int[,]{       //visualization here correlates to visualization in the game
+    /*    int[,] leveldesign = new int[,]{       //visualization here correlates to visualization in the game
         {9 , 9 , 2 , 9 , 9 , 9 , 0 , 9},       //left-top = {0,7} --- right-top = {7,7}
         {9 , 9 , 9 , 9 , 5 , 9 , 9 , 9},
         {9 , 9 , 9 , 9 , 9 , 9 , 9 , 5},
@@ -180,11 +183,36 @@ public class BoardManager : MonoBehaviour
         {5 , 9 , 9 , 9 , 9 , 9 , 9 , 9},
         {9 , 9 , 9 , 9 , 9 , 4 , 9 , 9},
         {3 , 9 , 1 , 9 , 9 , 9 , 9 , 9}         //left-bottom = {0,0} --- bottom-right = {7,0}
-    };
+    };*/
+
+    public int[,] leveldesign { set; get; }
+
+    private void ReadLevel(int number)
+    {
+        //get file from its directory or path
+        string readFromFilePath = Application.dataPath + "/MiniGame1Levels/Level" + number + ".txt";
+
+        //int c_i = 0;
+
+        List<int> list = new List<int>();
+
+        List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
+
+        for (int i = 0; i < 8; ++i)
+        {
+            for(int j = 0; j < 8; ++j)
+            {
+                leveldesign[i,j] = (int)fileLines[i][j*2]-'0';
+            }
+        }
+    }
+
     private void SpawnAllLevel()
     {
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
+        leveldesign = new int[8, 8];
+        ReadLevel(1);
         int itx = 0;
         int ity = 0;
         foreach (int obj in leveldesign)
