@@ -72,13 +72,48 @@ public class BoardManager : MonoBehaviour
 
     private void MoveMarble(int x, int y)
     {
-        if(allowedMoves[x,y])
+         int addx = selectedMarble.CurrentX-x;
+        int addy = selectedMarble.CurrentY-y;
+        if(selectedMarble.GetType() == typeof(EntangledMarble)){
+            Marble c = null;
+            
+            foreach (Marble mar in Marbles)
+            {
+                if(mar!=null && mar != c){
+                if(mar.GetType()== typeof(EntangledMarble)){
+                    int newx = mar.CurrentX-addx;
+                    int newy = mar.CurrentY-addy;
+                    if(newx>=0 && newx <8 && newy >= 0 && newy< 8 && leveldesign[7-newx,newy]!= 3){
+                    if(mar.PossibleMove()[newx , newy]){
+                        Marbles[mar.CurrentX, mar.CurrentY] = null;
+                        mar.transform.position = GetTileCenter(newx,newy);
+                        mar.SetPosition(newx,newy);
+                        Marbles[newx,newy] = mar;
+                        if(leveldesign[7-newy,newx]== 2){
+                            activePiece.Remove(mar.gameObject);
+                            Marbles[newx,newy] = null;
+                            Destroy(mar.gameObject);
+                        }
+                    }
+                    }
+                }
+                c = mar;
+                }
+            }
+            moves_left -= 1;
+        }
+       else if(allowedMoves[x,y] && leveldesign[7-x,y]!= 3 )
         {
             Marbles[selectedMarble.CurrentX, selectedMarble.CurrentY] = null;
             selectedMarble.transform.position = GetTileCenter(x, y);
             selectedMarble.SetPosition(x,y);
             Marbles[x, y] = selectedMarble;
+            if(leveldesign[7-y,x]== 2){
+                activePiece.Remove(selectedMarble.gameObject);
+                Destroy(selectedMarble.gameObject);
+            }
             moves_left -= 1;
+            
         }
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
@@ -181,7 +216,7 @@ public class BoardManager : MonoBehaviour
     private Vector3 GetTileSFCenter(int x, int y)
     {
         Vector3 origin = Vector3.zero;
-        origin.x += (TILE_SIZE * x) + SF_TILE_OFFSET;
+        origin.x += (TILE_SIZE * x);
         origin.z += (TILE_SIZE * y);
         return origin;
     }

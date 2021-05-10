@@ -16,7 +16,7 @@ public class BasicMarble : Marble
        if(CurrentY != 7){
            for (int k = 0; k < 3; k++)
            {
-               if(i>=0 || i<8 ){
+               if(i>=0 && i<8 ){
                    c = BoardManager.Instance.Marbles[i,j];
                    if(c==null){
                        r[i,j] = true;
@@ -31,7 +31,7 @@ public class BasicMarble : Marble
         if(CurrentY != 0){
            for (int k = 0; k < 3; k++)
            {
-               if(i>=0 || i<8 ){
+               if(i>=0 && i<8 ){
                    c = BoardManager.Instance.Marbles[i,j];
                    if(c==null){
                        r[i,j] = true;
@@ -48,7 +48,7 @@ public class BasicMarble : Marble
 
            }
        }
-       if(CurrentX != 0){
+       if(CurrentX != 7){
            c = BoardManager.Instance.Marbles[CurrentX+1,CurrentY];
            if(c == null){
                r[CurrentX+1, CurrentY] = true;
