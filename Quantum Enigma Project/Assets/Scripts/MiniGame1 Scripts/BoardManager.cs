@@ -216,7 +216,7 @@ public class BoardManager : MonoBehaviour
     private Vector3 GetTileSFCenter(int x, int y)
     {
         Vector3 origin = Vector3.zero;
-        origin.x += (TILE_SIZE * x);
+        origin.x += (TILE_SIZE * x) + SF_TILE_OFFSET;
         origin.z += (TILE_SIZE * y);
         return origin;
     }
