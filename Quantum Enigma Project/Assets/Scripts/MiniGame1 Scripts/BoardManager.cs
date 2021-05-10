@@ -76,7 +76,6 @@ public class BoardManager : MonoBehaviour
         {
             Marbles[selectedMarble.CurrentX, selectedMarble.CurrentY] = null;
             selectedMarble.transform.position = GetTileCenter(x, y);
-            selectedMarble.SetPosition(x,y);
             Marbles[x, y] = selectedMarble;
             moves_left -= 1;
         }
