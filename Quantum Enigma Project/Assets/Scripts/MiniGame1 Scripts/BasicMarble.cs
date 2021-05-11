@@ -22,7 +22,7 @@ public class BasicMarble : Marble
 
             }
        }
-        if(CurrentX != 7){
+        if(CurrentY != 7){
             if (BoardManager.Instance.Marbles[CurrentX, CurrentY+1] != null)
             {
                 c = BoardManager.Instance.Marbles[CurrentX, CurrentY+1];

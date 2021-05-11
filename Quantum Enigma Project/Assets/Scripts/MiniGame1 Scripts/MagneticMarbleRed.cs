@@ -11,46 +11,30 @@ public class MagneticMarbleRed : Marble
         bool[,] r = new bool[8, 8];
         i = CurrentX - 1;
         j = CurrentY + 1;
-        if (CurrentY != 7)
-        {
-            for (int k = 0; k < 3; k++)
-            {
-                if (i >= 0 && i < 8 && j >= 0 && j < 8)
-                {
-                    if (BoardManager.Instance.Marbles[i, j] != null)
-                    {
-                        c = BoardManager.Instance.Marbles[i, j];
-                    }
-                    else
-                    {
-                        r[i, j] = true;
-                    }
-                }
-                i++;
-            }
-        }
 
-        i = CurrentX - 1;
-        j = CurrentY - 1;
         if (CurrentY != 0)
         {
-            for (int k = 0; k < 3; k++)
+            if (BoardManager.Instance.Marbles[CurrentX, CurrentY - 1] != null)
             {
-                if (i >= 0 && i < 8 && j >= 0 && j < 8)
-                {
-                    if (BoardManager.Instance.Marbles[i, j] != null)
-                    {
-                        c = BoardManager.Instance.Marbles[i, j];
-                    }
-                    else
-                    {
-                        r[i, j] = true;
-                    }
-                }
-                i++;
+                c = BoardManager.Instance.Marbles[CurrentX, CurrentY - 1];
+            }
+            else
+            {
+                r[CurrentX, CurrentY - 1] = true;
+
             }
         }
-
+        if (CurrentY != 7)
+        {
+            if (BoardManager.Instance.Marbles[CurrentX, CurrentY + 1] != null)
+            {
+                c = BoardManager.Instance.Marbles[CurrentX, CurrentY + 1];
+            }
+            else
+            {
+                r[CurrentX, CurrentY + 1] = true;
+            }
+        }
         if (CurrentX != 0)
         {
             if (BoardManager.Instance.Marbles[CurrentX - 1, CurrentY] != null)

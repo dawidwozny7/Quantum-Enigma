@@ -79,8 +79,12 @@ public class BoardManager : MonoBehaviour
         int addy = selectedMarble.CurrentY-y;
         if(selectedMarble.GetType() == typeof(EntangledMarble)){
             Marble c = null;
-            
-            foreach (Marble mar in Marbles)
+            List<Marble> existingOnes = new List<Marble>();
+            foreach ( Marble mar in Marbles)
+            {
+                if (mar != null) existingOnes.Add(mar);
+            }
+            foreach (Marble mar in existingOnes)
             {
                 if(mar!=null && mar != c){
                 if(mar.GetType()== typeof(EntangledMarble)){
@@ -215,7 +219,7 @@ public class BoardManager : MonoBehaviour
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
         leveldesign = new int[8, 8];
-        ReadLevel(2);
+        ReadLevel(1);
         int itx = 0;
         int ity = 0;
         foreach (int obj in leveldesign)
