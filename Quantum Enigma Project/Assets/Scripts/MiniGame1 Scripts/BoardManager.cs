@@ -21,7 +21,9 @@ public class BoardManager : MonoBehaviour
 
     private Quaternion tileOrientation = Quaternion.Euler(90, 0, 0);
 
-    public int moves_left = 10;
+    public int moves_left = 20;
+
+    public int level_number = 1;
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
@@ -340,7 +342,7 @@ public class BoardManager : MonoBehaviour
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
         leveldesign = new int[8, 8];
-        ReadLevel(3);
+        ReadLevel(level_number);
         int itx = 0;
         int ity = 0;
         foreach (int obj in leveldesign)
