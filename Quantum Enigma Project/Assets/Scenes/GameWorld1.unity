@@ -1880,6 +1880,24 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.15333742, y: 0.025, z: 0.019503344}
   m_Center: {x: 0.0016687475, y: -0.000000004656613, z: -0.004751672}
+--- !u!1 &357268200 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7953606483559150473, guid: 169b73c4e7613a84295852c64882aa53, type: 3}
+  m_PrefabInstance: {fileID: 1664299271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &357268203
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 357268200}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.12, y: 0.12, z: 0.1}
+  m_Center: {x: 0.02, y: 0.05, z: 0}
 --- !u!1 &370234876 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4356877828898064976, guid: 3987c852525c9fd43954e7851238afa9, type: 3}
@@ -8246,7 +8264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 169b73c4e7613a84295852c64882aa53, type: 3}
       propertyPath: m_Name
-      value: chair
+      value: Chair
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 169b73c4e7613a84295852c64882aa53, type: 3}
+      propertyPath: m_TagString
+      value: Chair
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 169b73c4e7613a84295852c64882aa53, type: 3}
@@ -9797,29 +9819,11 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.019999998, y: 0.020000031, z: 0.020000001}
   m_Center: {x: -0.0000000037252903, y: -0.000000059604645, z: 0}
---- !u!1 &2085198809 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 169b73c4e7613a84295852c64882aa53, type: 3}
-  m_PrefabInstance: {fileID: 1664299271}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2085198810 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 169b73c4e7613a84295852c64882aa53, type: 3}
   m_PrefabInstance: {fileID: 1664299271}
   m_PrefabAsset: {fileID: 0}
---- !u!65 &2085198811
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2085198809}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.1, y: 0.1, z: 0.1}
-  m_Center: {x: 0, y: 0.05, z: 0}
 --- !u!1 &2086601548
 GameObject:
   m_ObjectHideFlags: 0
