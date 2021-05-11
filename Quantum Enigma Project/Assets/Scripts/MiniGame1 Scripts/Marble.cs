@@ -8,6 +8,9 @@ public abstract class Marble : MonoBehaviour
     public int CurrentY { set; get; }
     public bool isBasic;
     public bool isEntangled;
+    public bool isDouble;
+    public bool isMagneticRed;
+    public bool isMagneticBlue;
 
     public void SetPosition(int x, int y)
     {
