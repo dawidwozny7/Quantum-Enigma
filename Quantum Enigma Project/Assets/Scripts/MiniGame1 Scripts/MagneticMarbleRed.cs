@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EntangledMarble : Marble
+public class MagneticMarbleRed : Marble
 {
     public override bool[,] PossibleMove()
     {
@@ -62,4 +62,5 @@ public class EntangledMarble : Marble
 
         return r;
     }
+
 }

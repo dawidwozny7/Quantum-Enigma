@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using System.IO;
+using System.Linq;
 
 public class BoardManager : MonoBehaviour
 {
@@ -18,7 +21,9 @@ public class BoardManager : MonoBehaviour
 
     private Quaternion tileOrientation = Quaternion.Euler(90, 0, 0);
 
-    public int moves_left = 10;
+    public int moves_left = 20;
+
+    public int level_number = 1;
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
@@ -72,12 +77,173 @@ public class BoardManager : MonoBehaviour
 
     private void MoveMarble(int x, int y)
     {
-        if(allowedMoves[x,y])
+         int addx = selectedMarble.CurrentX-x;
+        int addy = selectedMarble.CurrentY-y;
+        if(selectedMarble.GetType() == typeof(EntangledMarble)){
+            Marble c = null;
+            List<Marble> existingOnes = new List<Marble>();
+            existingOnes.Add(selectedMarble);
+            foreach ( Marble mar in Marbles)
+            {
+                if (mar != null && mar!=selectedMarble) existingOnes.Add(mar);
+            }
+            foreach (Marble mar in existingOnes)
+            {
+                if(mar!=null && mar != c){
+                if(mar.GetType()== typeof(EntangledMarble)){
+                    int newx = mar.CurrentX-addx;
+                    int newy = mar.CurrentY-addy;
+                    if(newx>=0 && newx <8 && newy >= 0 && newy< 8 && leveldesign[7-newy,newx]!= 3){
+                    if(mar.PossibleMove()[newx , newy]){
+                        Marbles[mar.CurrentX, mar.CurrentY] = null;
+                        mar.transform.position = GetTileCenter(newx,newy);
+                        mar.SetPosition(newx,newy);
+                        Marbles[newx,newy] = mar;
+                        if(leveldesign[7-newy,newx]== 2){
+                            activePiece.Remove(mar.gameObject);
+                            Marbles[newx,newy] = null;
+                            Destroy(mar.gameObject);
+                        }
+                    }
+                    }
+                }
+                c = mar;
+                }
+            }
+            moves_left -= 1;
+        }
+       else if (selectedMarble.GetType() == typeof(MagneticMarbleRed))
+        {
+            Marble c = null;
+            List<Marble> existingOnes = new List<Marble>();
+            existingOnes.Add(selectedMarble);
+            foreach (Marble mar in Marbles)
+            {
+                if (mar != null && mar != selectedMarble) existingOnes.Add(mar);
+            }
+            foreach (Marble mar in existingOnes)
+            {
+                if (mar != null && mar != c)
+                {
+                    if (mar.GetType() == typeof(MagneticMarbleRed))
+                    {
+                        int newx = mar.CurrentX - addx;
+                        int newy = mar.CurrentY - addy;
+                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        {
+                            if (mar.PossibleMove()[newx, newy])
+                            {
+                                Marbles[mar.CurrentX, mar.CurrentY] = null;
+                                mar.transform.position = GetTileCenter(newx, newy);
+                                mar.SetPosition(newx, newy);
+                                Marbles[newx, newy] = mar;
+                                if (leveldesign[7 - newy, newx] == 2)
+                                {
+                                    activePiece.Remove(mar.gameObject);
+                                    Marbles[newx, newy] = null;
+                                    Destroy(mar.gameObject);
+                                }
+                            }
+                        }
+                    }
+                    if (mar.GetType() == typeof(MagneticMarbleBlue))
+                    {
+                        int newx = mar.CurrentX + addx;
+                        int newy = mar.CurrentY + addy;
+                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        {
+                            if (mar.PossibleMove()[newx, newy])
+                            {
+                                Marbles[mar.CurrentX, mar.CurrentY] = null;
+                                mar.transform.position = GetTileCenter(newx, newy);
+                                mar.SetPosition(newx, newy);
+                                Marbles[newx, newy] = mar;
+                                if (leveldesign[7 - newy, newx] == 2)
+                                {
+                                    activePiece.Remove(mar.gameObject);
+                                    Marbles[newx, newy] = null;
+                                    Destroy(mar.gameObject);
+                                }
+                            }
+                        }
+                    }
+                    c = mar;
+                }
+            }
+            moves_left -= 1;
+        }
+        else if (selectedMarble.GetType() == typeof(MagneticMarbleBlue))
+        {
+            Marble c = null;
+            List<Marble> existingOnes = new List<Marble>();
+            existingOnes.Add(selectedMarble);
+            foreach (Marble mar in Marbles)
+            {
+                if (mar != null && mar != selectedMarble) existingOnes.Add(mar);
+            }
+            foreach (Marble mar in existingOnes)
+            {
+                if (mar != null && mar != c)
+                {
+                    if (mar.GetType() == typeof(MagneticMarbleBlue))
+                    {
+                        int newx = mar.CurrentX - addx;
+                        int newy = mar.CurrentY - addy;
+                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        {
+                            if (mar.PossibleMove()[newx, newy])
+                            {
+                                Marbles[mar.CurrentX, mar.CurrentY] = null;
+                                mar.transform.position = GetTileCenter(newx, newy);
+                                mar.SetPosition(newx, newy);
+                                Marbles[newx, newy] = mar;
+                                if (leveldesign[7 - newy, newx] == 2)
+                                {
+                                    activePiece.Remove(mar.gameObject);
+                                    Marbles[newx, newy] = null;
+                                    Destroy(mar.gameObject);
+                                }
+                            }
+                        }
+                    }
+                    if (mar.GetType() == typeof(MagneticMarbleRed))
+                    {
+                        int newx = mar.CurrentX + addx;
+                        int newy = mar.CurrentY + addy;
+                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        {
+                            if (mar.PossibleMove()[newx, newy])
+                            {
+                                Marbles[mar.CurrentX, mar.CurrentY] = null;
+                                mar.transform.position = GetTileCenter(newx, newy);
+                                mar.SetPosition(newx, newy);
+                                Marbles[newx, newy] = mar;
+                                if (leveldesign[7 - newy, newx] == 2)
+                                {
+                                    activePiece.Remove(mar.gameObject);
+                                    Marbles[newx, newy] = null;
+                                    Destroy(mar.gameObject);
+                                }
+                            }
+                        }
+                    }
+                    c = mar;
+                }
+            }
+            moves_left -= 1;
+        }
+        else if(allowedMoves[x,y] && leveldesign[7-y,x]!= 3 )
         {
             Marbles[selectedMarble.CurrentX, selectedMarble.CurrentY] = null;
             selectedMarble.transform.position = GetTileCenter(x, y);
+            selectedMarble.SetPosition(x,y);
             Marbles[x, y] = selectedMarble;
+            if(leveldesign[7-y,x]== 2){
+                activePiece.Remove(selectedMarble.gameObject);
+                Destroy(selectedMarble.gameObject);
+            }
             moves_left -= 1;
+            
         }
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
@@ -132,10 +298,13 @@ public class BoardManager : MonoBehaviour
     3 = blockade
     4 = basic marble
     5 = entangled marble
+    6 = double marble
+    7 = magnetic marble red
+    8 = magnetic marble blue
     9 = empty
     */
 
-        int[,] leveldesign = new int[,]{       //visualization here correlates to visualization in the game
+    /*    int[,] leveldesign = new int[,]{       //visualization here correlates to visualization in the game
         {9 , 9 , 2 , 9 , 9 , 9 , 0 , 9},       //left-top = {0,7} --- right-top = {7,7}
         {9 , 9 , 9 , 9 , 5 , 9 , 9 , 9},
         {9 , 9 , 9 , 9 , 9 , 9 , 9 , 5},
@@ -144,11 +313,36 @@ public class BoardManager : MonoBehaviour
         {5 , 9 , 9 , 9 , 9 , 9 , 9 , 9},
         {9 , 9 , 9 , 9 , 9 , 4 , 9 , 9},
         {3 , 9 , 1 , 9 , 9 , 9 , 9 , 9}         //left-bottom = {0,0} --- bottom-right = {7,0}
-    };
+    };*/
+
+    public int[,] leveldesign { set; get; }
+
+    private void ReadLevel(int number)
+    {
+        //get file from its directory or path
+        string readFromFilePath = Application.dataPath + "/MiniGame1Levels/Level" + number + ".txt";
+
+        //int c_i = 0;
+
+        List<int> list = new List<int>();
+
+        List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
+
+        for (int i = 0; i < 8; ++i)
+        {
+            for(int j = 0; j < 8; ++j)
+            {
+                leveldesign[i,j] = (int)fileLines[i][j*2]-'0';
+            }
+        }
+    }
+
     private void SpawnAllLevel()
     {
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
+        leveldesign = new int[8, 8];
+        ReadLevel(level_number);
         int itx = 0;
         int ity = 0;
         foreach (int obj in leveldesign)
@@ -159,7 +353,7 @@ public class BoardManager : MonoBehaviour
             else if((obj==2)||(obj==3)){
                 SpawnLBTile(obj, GetTileCenter(itx,7- ity));
             }
-            else if((obj==4)||(obj==5)){
+            else if( obj > 3 && obj < 9){
                 SpawnPiece(obj,itx,7- ity);
             }
             itx +=1;
