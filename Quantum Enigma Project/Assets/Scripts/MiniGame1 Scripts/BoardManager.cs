@@ -28,12 +28,11 @@ public class BoardManager : MonoBehaviour
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
-    public int strtx = 0;
-    public int strty = 7;
+    private int strtx = 0;
+    private int strty = 7;
 
-    public int finx = 1;
-
-    public int finy = 6;
+    private int finx = 1;
+    private int finy = 6;
     
     private void Awake()
     {
@@ -476,12 +475,12 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
                 SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
                 if(obj == 0)
                 {
-                    strtx = itx-1;
+                    strtx = itx;
                     strty = 7 - ity;
                 }
                 else
                 {
-                    finx = itx-1;
+                    finx = itx;
                     finy = 7 - ity;
                 }
             }
