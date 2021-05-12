@@ -1,4 +1,5 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -27,7 +28,12 @@ public class BoardManager : MonoBehaviour
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
+    private int strtx = 0;
+    private int strty = 7;
 
+    private int finx = 1;
+
+    private int finy = 6;
     
     private void Awake()
     {
@@ -43,7 +49,6 @@ public class BoardManager : MonoBehaviour
     {
         UpdateSelection();
         DrawBoard();
-
         if( Input.GetMouseButtonDown(0))
         {
             if(selectionX>=0 && selectionY>=0)
@@ -59,6 +64,123 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+
+
+
+    static void isPath(Marble[,] matrix,int x, int y, int fx, int fy, int n)
+{
+     
+    // Defining visited array to keep
+    // track of already visited indexes
+    bool[,] visited = new bool[n, n];
+     
+    // Flag to indicate whether the
+    // path exists or not
+    bool flag = false;
+ 
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+             
+            // If matrix[i][j] is source
+            // and it is not visited
+            if (matrix[i, j] != null && i == x && j==y &&
+              !visited[i, j])
+               
+                // Starting from i, j and
+                // then finding the path
+                if (isPath(matrix,fx,fy, i, j,
+                           visited))
+                {
+                     
+                    // If path exists
+                    flag = true;
+                    break;
+                }
+        }
+    }
+    if (flag)
+        Debug.Log("YES");
+    else
+        Debug.Log("NO");
+}
+ 
+// Method for checking boundaries
+public static bool isSafe(int i, int j,
+                          Marble[,] matrix)
+{
+    if (i >= 0 && i < matrix.GetLength(0) &&
+        j >= 0 && j < matrix.GetLength(1))
+        return true;
+         
+    return false;
+}
+ 
+// Returns true if there is a path from
+// a source (a cell with value 1) to a
+// destination (a cell with value 2)
+public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
+                          int j, bool[,] visited)
+{
+     
+    // Checking the boundaries, walls and
+    // whether the cell is unvisited
+    if (isSafe(i, j, matrix) &&
+           matrix[i, j] != null &&
+         !visited[i, j])
+    {
+         
+        // Make the cell visited
+        visited[i, j] = true;
+ 
+        // If the cell is the required
+        // destination then return true
+        if (matrix[i, j] != null && i == fx && j==fy)
+            return true;
+ 
+        // Traverse up
+        bool up = isPath(matrix, fx,fy, i - 1,
+                         j, visited);
+ 
+        // If path is found in up
+        // direction return true
+        if (up)
+            return true;
+ 
+        // Traverse left
+        bool left = isPath(matrix,fx,fy, i,
+                           j - 1, visited);
+ 
+        // If path is found in left
+        // direction return true
+        if (left)
+            return true;
+ 
+        // Traverse down
+        bool down = isPath(matrix,fx,fy, i + 1,
+                           j, visited);
+ 
+        // If path is found in down
+        // direction return true
+        if (down)
+            return true;
+ 
+        // Traverse right
+        bool right = isPath(matrix, i,fx,fy, j + 1,
+                            visited);
+ 
+        // If path is found in right
+        // direction return true
+        if (right)
+            return true;
+    }
+     
+    // No path has been found
+    return false;
+}
+
 
     private void SelectMarble(int x,int y)
     {
@@ -247,6 +369,7 @@ public class BoardManager : MonoBehaviour
         }
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
+        isPath(Marbles,strtx,strty,finx,finy,8);
     }
 
     private void UpdateSelection()
