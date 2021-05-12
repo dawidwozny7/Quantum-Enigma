@@ -328,11 +328,13 @@ public class BoardManager : MonoBehaviour
 
         List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
 
+        moves_left = (int)fileLines[0][0] - '0';
+
         for (int i = 0; i < 8; ++i)
         {
             for(int j = 0; j < 8; ++j)
             {
-                leveldesign[i,j] = (int)fileLines[i][j*2]-'0';
+                leveldesign[i,j] = (int)fileLines[i+1][j*2]-'0';
             }
         }
     }
