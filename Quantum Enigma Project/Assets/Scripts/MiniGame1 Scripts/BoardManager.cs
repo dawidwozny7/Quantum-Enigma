@@ -28,12 +28,12 @@ public class BoardManager : MonoBehaviour
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
-    private int strtx = 0;
-    private int strty = 7;
+    public int strtx = 0;
+    public int strty = 7;
 
-    private int finx = 1;
+    public int finx = 1;
 
-    private int finy = 6;
+    public int finy = 6;
     
     private void Awake()
     {
@@ -451,7 +451,7 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
 
         List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
 
-        moves_left = (int)fileLines[0][0] - '0';
+        moves_left = Int16.Parse(fileLines[0]);
 
         for (int i = 0; i < 8; ++i)
         {
@@ -474,6 +474,16 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
         {
             if((obj==0)||(obj==1)){
                 SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
+                if(obj == 0)
+                {
+                    strtx = itx-1;
+                    strty = 7 - ity;
+                }
+                else
+                {
+                    finx = itx-1;
+                    finy = 7 - ity;
+                }
             }
             else if((obj==2)||(obj==3)){
                 SpawnLBTile(obj, GetTileCenter(itx,7- ity));
