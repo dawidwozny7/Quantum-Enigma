@@ -67,7 +67,7 @@ public class BoardManager : MonoBehaviour
 
 
 
-    static void isPath(Marble[,] matrix,int x, int y, int fx, int fy, int n)
+    static bool isPath(Marble[,] matrix,int x, int y, int fx, int fy, int n)
 {
      
     // Defining visited array to keep
@@ -100,10 +100,14 @@ public class BoardManager : MonoBehaviour
                 }
         }
     }
-    if (flag)
+    if (flag){
         Debug.Log("YES");
-    else
+        return true;
+        }
+    else{
         Debug.Log("NO");
+        return false;
+        }
 }
  
 // Method for checking boundaries
@@ -368,7 +372,14 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
         }
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
-        isPath(Marbles,strtx,strty,finx,finy,8);
+        if(isPath(Marbles,strtx,strty,finx,finy,8)){
+            foreach (GameObject ob in activePiece)
+            {
+                Destroy(ob);
+            }
+            level_number +=1;
+            SpawnAllLevel();
+        }
     }
 
     private void UpdateSelection()
@@ -471,7 +482,14 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
         int ity = 0;
         foreach (int obj in leveldesign)
         {
-            if((obj==0)||(obj==1)){
+            if(obj==0){
+                strtx = itx;
+                strty = 7-ity;
+                SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
+            }
+            else if(obj==1){
+                finx = itx;
+                finy = 7-ity;
                 SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
                 if(obj == 0)
                 {
