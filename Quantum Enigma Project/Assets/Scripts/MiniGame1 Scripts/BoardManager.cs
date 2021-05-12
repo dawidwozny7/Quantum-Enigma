@@ -5,6 +5,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class BoardManager : MonoBehaviour
 {
@@ -24,7 +25,7 @@ public class BoardManager : MonoBehaviour
 
     public int moves_left = 20;
 
-    public int level_number = 1;
+    public int level_number = 111;
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
@@ -41,6 +42,7 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        //Cursor.lockState = CursorLockMode.None;
         SpawnAllLevel();
     }
 
@@ -101,11 +103,13 @@ public class BoardManager : MonoBehaviour
         }
     }
     if (flag){
-        Debug.Log("YES");
-        return true;
+            //Debug.Log("YES");
+            Cursor.lockState = CursorLockMode.Locked;
+            //SceneManager.LoadScene(1);
+            return true;
         }
     else{
-        Debug.Log("NO");
+        //Debug.Log("NO");
         return false;
         }
 }
@@ -377,8 +381,15 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
             {
                 Destroy(ob);
             }
-            level_number +=1;
-            SpawnAllLevel();
+            if (level_number == 333)
+            {
+                SceneManager.LoadScene(3);
+            }
+            else
+            {
+                level_number += 111;
+                SpawnAllLevel();
+            }
         }
     }
 
@@ -474,6 +485,7 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
 
     private void SpawnAllLevel()
     {
+        Cursor.lockState = CursorLockMode.None;
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
         leveldesign = new int[8, 8];
