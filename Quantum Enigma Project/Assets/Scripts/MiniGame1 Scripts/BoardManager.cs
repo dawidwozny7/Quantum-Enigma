@@ -42,6 +42,8 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        NumOfLevel.leveln = level_number;
+        LevelMovesLeft.movesl = 0 + BoardManager.Instance.moves_left;
         //Cursor.lockState = CursorLockMode.None;
         SpawnAllLevel();
     }
@@ -208,6 +210,12 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
     {
          int addx = selectedMarble.CurrentX-x;
         int addy = selectedMarble.CurrentY-y;
+        if (allowedMoves[x, y] == false)
+        {
+            BoardHighlights.Instance.HideHighlights();
+            selectedMarble = null; 
+            return;
+        }
         if(selectedMarble.GetType() == typeof(EntangledMarble)){
             Marble c = null;
             List<Marble> existingOnes = new List<Marble>();
@@ -387,10 +395,13 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
             }
             else
             {
+                LevelMovesLeft.movesl += 111;
                 level_number += 111;
+                NumOfLevel.leveln = level_number;
                 SpawnAllLevel();
             }
         }
+        LevelMovesLeft.movesl = moves_left;
     }
 
     private void UpdateSelection()
@@ -473,6 +484,7 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
         List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
 
         moves_left = Int16.Parse(fileLines[0]);
+        LevelMovesLeft.movesl = moves_left;
 
         for (int i = 0; i < 8; ++i)
         {
