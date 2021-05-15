@@ -1,9 +1,11 @@
 using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using System.IO;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class BoardManager : MonoBehaviour
 {
@@ -23,11 +25,15 @@ public class BoardManager : MonoBehaviour
 
     public int moves_left = 20;
 
-    public int level_number = 1;
+    public int level_number = 111;
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
+    private int strtx = 0;
+    private int strty = 7;
 
+    private int finx = 1;
+    private int finy = 6;
     
     private void Awake()
     {
@@ -36,6 +42,7 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        //Cursor.lockState = CursorLockMode.None;
         SpawnAllLevel();
     }
 
@@ -43,7 +50,6 @@ public class BoardManager : MonoBehaviour
     {
         UpdateSelection();
         DrawBoard();
-
         if( Input.GetMouseButtonDown(0))
         {
             if(selectionX>=0 && selectionY>=0)
@@ -59,6 +65,129 @@ public class BoardManager : MonoBehaviour
             }
         }
     }
+
+
+
+
+    static bool isPath(Marble[,] matrix,int x, int y, int fx, int fy, int n)
+{
+     
+    // Defining visited array to keep
+    // track of already visited indexes
+    bool[,] visited = new bool[n, n];
+     
+    // Flag to indicate whether the
+    // path exists or not
+    bool flag = false;
+ 
+    for(int i = 0; i < n; i++)
+    {
+        for(int j = 0; j < n; j++)
+        {
+             
+            // If matrix[i][j] is source
+            // and it is not visited
+            if (matrix[i, j] != null && i == x && j==y &&
+              !visited[i, j])
+               
+                // Starting from i, j and
+                // then finding the path
+                if (isPath(matrix,fx,fy, i, j,
+                           visited))
+                {
+                     
+                    // If path exists
+                    flag = true;
+                    break;
+                }
+        }
+    }
+    if (flag){
+            //Debug.Log("YES");
+            Cursor.lockState = CursorLockMode.Locked;
+            //SceneManager.LoadScene(1);
+            return true;
+        }
+    else{
+        //Debug.Log("NO");
+        return false;
+        }
+}
+ 
+// Method for checking boundaries
+public static bool isSafe(int i, int j,
+                          Marble[,] matrix)
+{
+    if (i >= 0 && i < matrix.GetLength(0) &&
+        j >= 0 && j < matrix.GetLength(1))
+        return true;
+         
+    return false;
+}
+ 
+// Returns true if there is a path from
+// a source (a cell with value 1) to a
+// destination (a cell with value 2)
+public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
+                          int j, bool[,] visited)
+{
+     
+    // Checking the boundaries, walls and
+    // whether the cell is unvisited
+    if (isSafe(i, j, matrix) &&
+           matrix[i, j] != null &&
+         !visited[i, j])
+    {
+         
+        // Make the cell visited
+        visited[i, j] = true;
+ 
+        // If the cell is the required
+        // destination then return true
+        if (matrix[i, j] != null && i == fx && j==fy)
+            return true;
+ 
+        // Traverse up
+        bool up = isPath(matrix, fx,fy, i - 1,
+                         j, visited);
+ 
+        // If path is found in up
+        // direction return true
+        if (up)
+            return true;
+ 
+        // Traverse left
+        bool left = isPath(matrix,fx,fy, i,
+                           j - 1, visited);
+ 
+        // If path is found in left
+        // direction return true
+        if (left)
+            return true;
+ 
+        // Traverse down
+        bool down = isPath(matrix,fx,fy, i + 1,
+                           j, visited);
+ 
+        // If path is found in down
+        // direction return true
+        if (down)
+            return true;
+ 
+        // Traverse right
+        bool right = isPath(matrix, i,fx,fy, j + 1,
+                            visited);
+ 
+        // If path is found in right
+        // direction return true
+        if (right)
+            return true;
+    }
+     
+    // No path has been found
+    return false;
+}
+
 
     private void SelectMarble(int x,int y)
     {
@@ -247,6 +376,21 @@ public class BoardManager : MonoBehaviour
         }
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
+        if(isPath(Marbles,strtx,strty,finx,finy,8)){
+            foreach (GameObject ob in activePiece)
+            {
+                Destroy(ob);
+            }
+            if (level_number == 333)
+            {
+                SceneManager.LoadScene(3);
+            }
+            else
+            {
+                level_number += 111;
+                SpawnAllLevel();
+            }
+        }
     }
 
     private void UpdateSelection()
@@ -328,17 +472,20 @@ public class BoardManager : MonoBehaviour
 
         List<string> fileLines = File.ReadAllLines(readFromFilePath).ToList();
 
+        moves_left = Int16.Parse(fileLines[0]);
+
         for (int i = 0; i < 8; ++i)
         {
             for(int j = 0; j < 8; ++j)
             {
-                leveldesign[i,j] = (int)fileLines[i][j*2]-'0';
+                leveldesign[i,j] = (int)fileLines[i+1][j*2]-'0';
             }
         }
     }
 
     private void SpawnAllLevel()
     {
+        Cursor.lockState = CursorLockMode.None;
         activePiece = new List<GameObject>();
         Marbles = new Marble[8, 8];
         leveldesign = new int[8, 8];
@@ -347,8 +494,25 @@ public class BoardManager : MonoBehaviour
         int ity = 0;
         foreach (int obj in leveldesign)
         {
-            if((obj==0)||(obj==1)){
+            if(obj==0){
+                strtx = itx;
+                strty = 7-ity;
                 SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
+            }
+            else if(obj==1){
+                finx = itx;
+                finy = 7-ity;
+                SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
+                if(obj == 0)
+                {
+                    strtx = itx;
+                    strty = 7 - ity;
+                }
+                else
+                {
+                    finx = itx;
+                    finy = 7 - ity;
+                }
             }
             else if((obj==2)||(obj==3)){
                 SpawnLBTile(obj, GetTileCenter(itx,7- ity));
