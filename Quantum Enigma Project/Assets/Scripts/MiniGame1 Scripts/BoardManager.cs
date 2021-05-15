@@ -42,6 +42,8 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        LevelNum.leveln = level_number;
+        MovesLeft.movesl = moves_left;
         //Cursor.lockState = CursorLockMode.None;
         SpawnAllLevel();
     }
@@ -387,10 +389,12 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
             }
             else
             {
+                LevelNum.leveln += 111;
                 level_number += 111;
                 SpawnAllLevel();
             }
         }
+        MovesLeft.movesl = moves_left;
     }
 
     private void UpdateSelection()
