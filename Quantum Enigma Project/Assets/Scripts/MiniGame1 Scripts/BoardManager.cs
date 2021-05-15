@@ -210,6 +210,12 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
     {
          int addx = selectedMarble.CurrentX-x;
         int addy = selectedMarble.CurrentY-y;
+        if (allowedMoves[x, y] == false)
+        {
+            BoardHighlights.Instance.HideHighlights();
+            selectedMarble = null; 
+            return;
+        }
         if(selectedMarble.GetType() == typeof(EntangledMarble)){
             Marble c = null;
             List<Marble> existingOnes = new List<Marble>();
@@ -391,6 +397,7 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
             {
                 LevelMovesLeft.movesl += 111;
                 level_number += 111;
+                NumOfLevel.leveln = level_number;
                 SpawnAllLevel();
             }
         }
