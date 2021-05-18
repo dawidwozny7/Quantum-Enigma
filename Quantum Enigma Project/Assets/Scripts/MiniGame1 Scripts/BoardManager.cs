@@ -25,7 +25,7 @@ public class BoardManager : MonoBehaviour
 
     public int moves_left = 20;
 
-    public int level_number = 111;
+    public int level_number = 1;
 
     public List<GameObject> boardPiecesPrefabs;
     private List<GameObject> activePiece;
@@ -389,14 +389,14 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
             {
                 Destroy(ob);
             }
-            if (level_number == 333)
+            if (level_number == 5)
             {
                 SceneManager.LoadScene(3);
             }
             else
             {
                 LevelMovesLeft.movesl += 111;
-                level_number += 111;
+                level_number += 1;
                 NumOfLevel.leveln = level_number;
                 SpawnAllLevel();
             }
