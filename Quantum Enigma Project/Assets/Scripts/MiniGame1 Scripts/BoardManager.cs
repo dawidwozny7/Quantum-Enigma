@@ -71,7 +71,7 @@ public class BoardManager : MonoBehaviour
 
 
 
-    static bool isPath(Marble[,] matrix,int x, int y, int fx, int fy, int n)
+    bool isPath(Marble[,] matrix,int x, int y, int fx, int fy, int n)
 {
      
     // Defining visited array to keep
@@ -117,7 +117,7 @@ public class BoardManager : MonoBehaviour
 }
  
 // Method for checking boundaries
-public static bool isSafe(int i, int j,
+public bool isSafe(int i, int j,
                           Marble[,] matrix)
 {
     if (i >= 0 && i < matrix.GetLength(0) &&
@@ -130,7 +130,7 @@ public static bool isSafe(int i, int j,
 // Returns true if there is a path from
 // a source (a cell with value 1) to a
 // destination (a cell with value 2)
-public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
+public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                           int j, bool[,] visited)
 {
      
@@ -177,7 +177,7 @@ public static bool isPath(Marble[,] matrix,int fx,int fy, int i,
             return true;
  
         // Traverse right
-        bool right = isPath(matrix, i,fx,fy, j + 1,
+        bool right = isPath(matrix, fx,fy,i, j + 1,
                             visited);
  
         // If path is found in right
