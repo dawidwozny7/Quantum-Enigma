@@ -12,7 +12,7 @@ public class BoardManager : MonoBehaviour
     public static BoardManager Instance{set;get;}
     private bool[,] allowedMoves{set;get;}
     public Marble[,] Marbles {set;get;}
-    private Marble selectedMarble;
+    public Marble selectedMarble;
 
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5f;
@@ -28,7 +28,7 @@ public class BoardManager : MonoBehaviour
     public int level_number = 1;
 
     public List<GameObject> boardPiecesPrefabs;
-    private List<GameObject> activePiece;
+    public List<GameObject> activePiece;
     private int strtx = 0;
     private int strty = 7;
 
@@ -495,7 +495,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
         }
     }
 
-    private void SpawnAllLevel()
+    public void SpawnAllLevel()
     {
         Cursor.lockState = CursorLockMode.None;
         activePiece = new List<GameObject>();

@@ -75,7 +75,7 @@ Level 5
 9 9 9 9 9 3 5 9
 9 5 9 9 9 9 9 9
 
-ideal 8, max 9
+ideal 8, max 10
 
 Level 6
 10 x 10
