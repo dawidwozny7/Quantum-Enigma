@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
-public class EndButton : MonoBehaviour
+public class EnterOnClick5 : MonoBehaviour
 {
     // Start is called before the first frame update
     void Start()
@@ -16,10 +15,4 @@ public class EndButton : MonoBehaviour
     {
         
     }
-
-    public void LoadGame()
-	{
-        ClearBoards.won1 = true;
-        SceneManager.LoadScene(1);
-	}
 }

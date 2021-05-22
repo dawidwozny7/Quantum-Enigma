@@ -27,14 +27,17 @@ public class BoardManager : MonoBehaviour
 
     public int level_number = 1;
 
+    public int GridSize = 8;
+
     public List<GameObject> boardPiecesPrefabs;
     public List<GameObject> activePiece;
     private int strtx = 0;
-    private int strty = 7;
+    private int strty = 0;
 
-    private int finx = 1;
-    private int finy = 6;
+    private int finx = 0;
+    private int finy = 0;
     
+
     private void Awake()
     {
         Instance = this;
@@ -230,13 +233,13 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                 if(mar.GetType()== typeof(EntangledMarble)){
                     int newx = mar.CurrentX-addx;
                     int newy = mar.CurrentY-addy;
-                    if(newx>=0 && newx <8 && newy >= 0 && newy< 8 && leveldesign[7-newy,newx]!= 3){
+                    if(newx>=0 && newx <GridSize && newy >= 0 && newy< GridSize && leveldesign[(GridSize-1)-newy,newx]!= 3){
                     if(mar.PossibleMove()[newx , newy]){
                         Marbles[mar.CurrentX, mar.CurrentY] = null;
                         mar.transform.position = GetTileCenter(newx,newy);
                         mar.SetPosition(newx,newy);
                         Marbles[newx,newy] = mar;
-                        if(leveldesign[7-newy,newx]== 2){
+                        if(leveldesign[(GridSize-1)-newy,newx]== 2){
                             activePiece.Remove(mar.gameObject);
                             Marbles[newx,newy] = null;
                             Destroy(mar.gameObject);
@@ -266,7 +269,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                     {
                         int newx = mar.CurrentX - addx;
                         int newy = mar.CurrentY - addy;
-                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        if (newx >= 0 && newx < GridSize && newy >= 0 && newy < GridSize && leveldesign[(GridSize-1) - newy, newx] != 3)
                         {
                             if (mar.PossibleMove()[newx, newy])
                             {
@@ -274,7 +277,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                                 mar.transform.position = GetTileCenter(newx, newy);
                                 mar.SetPosition(newx, newy);
                                 Marbles[newx, newy] = mar;
-                                if (leveldesign[7 - newy, newx] == 2)
+                                if (leveldesign[(GridSize-1) - newy, newx] == 2)
                                 {
                                     activePiece.Remove(mar.gameObject);
                                     Marbles[newx, newy] = null;
@@ -287,7 +290,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                     {
                         int newx = mar.CurrentX + addx;
                         int newy = mar.CurrentY + addy;
-                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        if (newx >= 0 && newx < GridSize && newy >= 0 && newy < GridSize && leveldesign[(GridSize-1) - newy, newx] != 3)
                         {
                             if (mar.PossibleMove()[newx, newy])
                             {
@@ -295,7 +298,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                                 mar.transform.position = GetTileCenter(newx, newy);
                                 mar.SetPosition(newx, newy);
                                 Marbles[newx, newy] = mar;
-                                if (leveldesign[7 - newy, newx] == 2)
+                                if (leveldesign[(GridSize-1) - newy, newx] == 2)
                                 {
                                     activePiece.Remove(mar.gameObject);
                                     Marbles[newx, newy] = null;
@@ -326,7 +329,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                     {
                         int newx = mar.CurrentX - addx;
                         int newy = mar.CurrentY - addy;
-                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        if (newx >= 0 && newx < GridSize && newy >= 0 && newy < GridSize && leveldesign[(GridSize-1) - newy, newx] != 3)
                         {
                             if (mar.PossibleMove()[newx, newy])
                             {
@@ -334,7 +337,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                                 mar.transform.position = GetTileCenter(newx, newy);
                                 mar.SetPosition(newx, newy);
                                 Marbles[newx, newy] = mar;
-                                if (leveldesign[7 - newy, newx] == 2)
+                                if (leveldesign[(GridSize-1) - newy, newx] == 2)
                                 {
                                     activePiece.Remove(mar.gameObject);
                                     Marbles[newx, newy] = null;
@@ -347,7 +350,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                     {
                         int newx = mar.CurrentX + addx;
                         int newy = mar.CurrentY + addy;
-                        if (newx >= 0 && newx < 8 && newy >= 0 && newy < 8 && leveldesign[7 - newy, newx] != 3)
+                        if (newx >= 0 && newx < GridSize && newy >= 0 && newy < GridSize && leveldesign[(GridSize-1) - newy, newx] != 3)
                         {
                             if (mar.PossibleMove()[newx, newy])
                             {
@@ -355,7 +358,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                                 mar.transform.position = GetTileCenter(newx, newy);
                                 mar.SetPosition(newx, newy);
                                 Marbles[newx, newy] = mar;
-                                if (leveldesign[7 - newy, newx] == 2)
+                                if (leveldesign[(GridSize-1) - newy, newx] == 2)
                                 {
                                     activePiece.Remove(mar.gameObject);
                                     Marbles[newx, newy] = null;
@@ -369,13 +372,13 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             }
             moves_left -= 1;
         }
-        else if(allowedMoves[x,y] && leveldesign[7-y,x]!= 3 )
+        else if(allowedMoves[x,y] && leveldesign[(GridSize-1)-y,x]!= 3 )
         {
             Marbles[selectedMarble.CurrentX, selectedMarble.CurrentY] = null;
             selectedMarble.transform.position = GetTileCenter(x, y);
             selectedMarble.SetPosition(x,y);
             Marbles[x, y] = selectedMarble;
-            if(leveldesign[7-y,x]== 2){
+            if(leveldesign[(GridSize-1)-y,x]== 2){
                 activePiece.Remove(selectedMarble.gameObject);
                 Destroy(selectedMarble.gameObject);
             }
@@ -384,7 +387,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
         }
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
-        if(isPath(Marbles,strtx,strty,finx,finy,8)){
+        if(isPath(Marbles,strtx,strty,finx,finy,GridSize)){
             foreach (GameObject ob in activePiece)
             {
                 Destroy(ob);
@@ -486,9 +489,9 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
         moves_left = Int16.Parse(fileLines[0]);
         LevelMovesLeft.movesl = moves_left;
 
-        for (int i = 0; i < 8; ++i)
+        for (int i = 0; i < GridSize; ++i)
         {
-            for(int j = 0; j < 8; ++j)
+            for(int j = 0; j < GridSize; ++j)
             {
                 leveldesign[i,j] = (int)fileLines[i+1][j*2]-'0';
             }
@@ -499,8 +502,8 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
     {
         Cursor.lockState = CursorLockMode.None;
         activePiece = new List<GameObject>();
-        Marbles = new Marble[8, 8];
-        leveldesign = new int[8, 8];
+        Marbles = new Marble[GridSize, GridSize];
+        leveldesign = new int[GridSize, GridSize];
         ReadLevel(level_number);
         int itx = 0;
         int ity = 0;
@@ -508,32 +511,32 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
         {
             if(obj==0){
                 strtx = itx;
-                strty = 7-ity;
-                SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
+                strty = (GridSize-1)-ity;
+                SpawnSFTile(obj, GetTileSFCenter(itx ,(GridSize-1)- ity+1));
             }
             else if(obj==1){
                 finx = itx;
-                finy = 7-ity;
-                SpawnSFTile(obj, GetTileSFCenter(itx ,7- ity+1));
+                finy = (GridSize-1)-ity;
+                SpawnSFTile(obj, GetTileSFCenter(itx ,(GridSize-1)- ity+1));
                 if(obj == 0)
                 {
                     strtx = itx;
-                    strty = 7 - ity;
+                    strty = (GridSize-1) - ity;
                 }
                 else
                 {
                     finx = itx;
-                    finy = 7 - ity;
+                    finy = (GridSize-1) - ity;
                 }
             }
             else if((obj==2)||(obj==3)){
-                SpawnLBTile(obj, GetTileCenter(itx,7- ity));
+                SpawnLBTile(obj, GetTileCenter(itx,(GridSize-1)- ity));
             }
             else if( obj > 3 && obj < 9){
-                SpawnPiece(obj,itx,7- ity);
+                SpawnPiece(obj,itx,(GridSize-1)- ity);
             }
             itx +=1;
-            if (itx%8 == 0){
+            if (itx%GridSize == 0){
                 ity+=1;
                 itx = 0;
             }
@@ -557,14 +560,14 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
 
     private void DrawBoard()
     {
-        Vector3 widthLine = Vector3.right * 8;
-        Vector3 heightLine = Vector3.forward * 8;
+        Vector3 widthLine = Vector3.right * GridSize;
+        Vector3 heightLine = Vector3.forward * GridSize;
 
-        for (int i = 0; i <= 8; ++i)
+        for (int i = 0; i <= GridSize; ++i)
         {
             Vector3 start = Vector3.forward * i;
             Debug.DrawLine(start, start + widthLine);
-            for (int j = 0; j <= 8; j++)
+            for (int j = 0; j <= GridSize; j++)
             {
                 start = Vector3.right * j;
                 Debug.DrawLine(start, start + heightLine);
