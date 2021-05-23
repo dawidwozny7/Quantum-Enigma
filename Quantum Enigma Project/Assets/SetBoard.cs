@@ -11,7 +11,16 @@ public class SetBoard : MonoBehaviour
             GameObject.Find("Room1Board").SetActive(false);
         }
         if(ClearBoards.won2){
-            GameObject.Find("Room1Board").SetActive(false);
+            GameObject.Find("Room2Board").SetActive(false);
+        }
+        if(ClearBoards.won3){
+            GameObject.Find("Room3Board").SetActive(false);
+        }
+        if(ClearBoards.won4){
+            GameObject.Find("Room4Board").SetActive(false);
+        }
+        if(ClearBoards.won5){
+            GameObject.Find("Room5Board").SetActive(false);
         }
         
     }

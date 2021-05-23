@@ -8,7 +8,7 @@ public class EndButton : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        Cursor.lockState = CursorLockMode.None;
     }
 
     // Update is called once per frame
@@ -19,7 +19,21 @@ public class EndButton : MonoBehaviour
 
     public void LoadGame()
 	{
+        if(ClearBoards.won4 == true){
+            ClearBoards.won5 = true;
+        }
+        if(ClearBoards.won3 == true){
+            ClearBoards.won4 = true;
+        }
+        if(ClearBoards.won2 == true){
+            ClearBoards.won3 = true;
+        }
+        if(ClearBoards.won1 == true){
+            ClearBoards.won2 = true;
+        }
+        else{   
         ClearBoards.won1 = true;
+        }
         SceneManager.LoadScene(1);
 	}
 }
