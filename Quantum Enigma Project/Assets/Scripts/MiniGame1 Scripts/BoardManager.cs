@@ -483,7 +483,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
                 SceneManager.LoadScene(6);
             }
             else if(level_number == 10){
-                SceneManager.LoadScene(7);
+                SceneManager.LoadScene(12);
             }
                 LevelMovesLeft.movesl += 111;
                 NumOfLevel.leveln = level_number;
