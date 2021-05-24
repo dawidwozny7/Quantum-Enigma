@@ -25,6 +25,10 @@ public class PlayerMovement : MonoBehaviour
     bool isMoving;
     float final_speed;
 
+    //void Start()
+    //{
+    //    SaveLoadPosition.Load();
+    //}
 
     void Update()
     {
