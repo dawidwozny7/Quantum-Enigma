@@ -242,8 +242,26 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             foreach ( Marble mar in Marbles)
             {
                 if (mar != null && mar!=selectedMarble) existingOnes.Add(mar);
+                //existingOnes.Reverse();
             }
-            //existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            if (addx == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            }
+            if (addx == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+                existingOnes.Reverse();
+            }
+            if (addy == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+            }
+            if (addy == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+                existingOnes.Reverse();
+            }
             foreach (Marble mar in existingOnes)
             {
                 if(mar!=null && mar != c){
@@ -277,6 +295,24 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             foreach (Marble mar in Marbles)
             {
                 if (mar != null && mar != selectedMarble) existingOnes.Add(mar);
+            }
+            if (addx == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            }
+            if (addx == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+                existingOnes.Reverse();
+            }
+            if (addy == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+            }
+            if (addy == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+                existingOnes.Reverse();
             }
             foreach (Marble mar in existingOnes)
             {
@@ -337,6 +373,24 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             foreach (Marble mar in Marbles)
             {
                 if (mar != null && mar != selectedMarble) existingOnes.Add(mar);
+            }
+            if (addx == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            }
+            if (addx == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+                existingOnes.Reverse();
+            }
+            if (addy == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+            }
+            if (addy == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+                existingOnes.Reverse();
             }
             foreach (Marble mar in existingOnes)
             {
