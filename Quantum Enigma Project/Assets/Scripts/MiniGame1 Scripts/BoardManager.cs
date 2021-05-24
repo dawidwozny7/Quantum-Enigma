@@ -243,6 +243,7 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             {
                 if (mar != null && mar!=selectedMarble) existingOnes.Add(mar);
             }
+            //existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
             foreach (Marble mar in existingOnes)
             {
                 if(mar!=null && mar != c){
