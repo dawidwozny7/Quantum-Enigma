@@ -276,7 +276,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\nCongrats! \nYou finished levels 5 and 10.\n\n\n\n\nYou journey is about
+  m_Text: "\nCongrats! \nYou finished next 2 levels.\n\n\n\n\nYou journey is about
     to end.\nDo you like dentist chairs?"
 --- !u!222 &790498748
 CanvasRenderer:

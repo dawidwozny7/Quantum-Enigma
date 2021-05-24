@@ -276,7 +276,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 1
     m_VerticalOverflow: 1
     m_LineSpacing: 1
-  m_Text: "\nCongrats! \nYou finished levels 4 and 9.\n\n\n\n\nRoom 5 is waiting
+  m_Text: "\nCongrats! \nYou finished next 2  levels.\n\n\n\n\nRoom 5 is waiting
     for you :)"
 --- !u!222 &790498748
 CanvasRenderer:
