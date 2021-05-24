@@ -29,6 +29,7 @@ public class SetBoard : MonoBehaviour
         }
         if(ClearBoards.won5){
             GameObject.Find("Room5Board").SetActive(false);
+            GameObject.Find("EndGameTrigger").SetActive(true);
         }
         
     }
