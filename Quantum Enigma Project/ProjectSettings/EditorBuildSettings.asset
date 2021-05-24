@@ -44,4 +44,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/EndGameEND.unity
     guid: 8ce6408afbc907d488435f27979704ec
+  - enabled: 1
+    path: Assets/Scenes/Instructions1.unity
+    guid: fdc8cc4413eb74b3b8b3aa52b90885cd
+  - enabled: 1
+    path: Assets/Scenes/Instructions2.unity
+    guid: bf22225a343674fd0867d8fdb676d99a
+  - enabled: 1
+    path: Assets/Scenes/Instructions3.unity
+    guid: f8c4e716d20574ba196744f348ac7331
+  - enabled: 1
+    path: Assets/Scenes/Instructions4.unity
+    guid: 4a7a486208d494a70b6f3d48e2a51e00
+  - enabled: 1
+    path: Assets/Scenes/Instructions5.unity
+    guid: 401313fa4a8134c5b9014cb3df3babdc
   m_configObjects: {}
