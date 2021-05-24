@@ -15,6 +15,33 @@ EditorBuildSettings:
     path: Assets/Scenes/MiniGame1Version3.unity
     guid: 33ef23b79360e82428fdeed6d7b9b8c3
   - enabled: 1
-    path: Assets/Scenes/EndGame.unity
+    path: Assets/Scenes/EndGame1.unity
     guid: babe13975c2007d44880d2e91d7e3f4e
+  - enabled: 1
+    path: Assets/Scenes/EndGame2.unity
+    guid: f6108b684d1054e2088ef9251ccc92bc
+  - enabled: 1
+    path: Assets/Scenes/EndGame3.unity
+    guid: ac8fcb4176bae477388250913629d57a
+  - enabled: 1
+    path: Assets/Scenes/EndGame4.unity
+    guid: 7e724fe2fef9a4aceb807650b2e6d34a
+  - enabled: 1
+    path: Assets/Scenes/EndGame5.unity
+    guid: 1ea5bc3cac39644eb9085a0c78afd5ea
+  - enabled: 1
+    path: Assets/Scenes/MiniGame2.unity
+    guid: c45aa7b8df48d449899cd70cd6fa5d0b
+  - enabled: 1
+    path: Assets/Scenes/MiniGame3.unity
+    guid: f35a5cebc292c49d8b318bb89442f8c6
+  - enabled: 1
+    path: Assets/Scenes/MiniGame4.unity
+    guid: 240e4c8f94db44cbc8ec1b5b5f5e615a
+  - enabled: 1
+    path: Assets/Scenes/MiniGame5.unity
+    guid: 72206042ba5cc48dc8c1b0a16ace4a28
+  - enabled: 1
+    path: Assets/Scenes/EndGameEND.unity
+    guid: 8ce6408afbc907d488435f27979704ec
   m_configObjects: {}

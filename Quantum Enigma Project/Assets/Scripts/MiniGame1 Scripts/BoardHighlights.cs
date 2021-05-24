@@ -23,8 +23,8 @@ public class BoardHighlights : MonoBehaviour
     }
 
     public void HighlightAllowedMoves(bool[,] moves){
-        for(int i = 0 ; i<8 ;i++){
-            for(int j = 0 ; j<8 ;j++){
+        for(int i = 0 ; i<(BoardManager.GridSize) ;i++){
+            for(int j = 0 ; j<(BoardManager.GridSize) ;j++){
                 if(moves[i,j]){
                     GameObject goo = GetHighlightObject();
                     goo.SetActive(true);

@@ -25,7 +25,7 @@ public class EndGameTrigger : MonoBehaviour
 		{
             Cursor.lockState = CursorLockMode.None;
             Time.timeScale = 1f;
-            SceneManager.LoadScene("EndGame");
+            SceneManager.LoadScene("EndGameEND");
 		}
 	}
 }

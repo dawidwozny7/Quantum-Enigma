@@ -9,10 +9,13 @@ using UnityEngine.SceneManagement;
 
 public class BoardManager : MonoBehaviour
 {
+    public GameObject gob;
+
     public static BoardManager Instance{set;get;}
     private bool[,] allowedMoves{set;get;}
     public Marble[,] Marbles {set;get;}
     public Marble selectedMarble;
+
 
     private const float TILE_SIZE = 1.0f;
     private const float TILE_OFFSET = 0.5f;
@@ -27,7 +30,7 @@ public class BoardManager : MonoBehaviour
 
     public int level_number = 1;
 
-    public int GridSize = 8;
+    public static int GridSize = 8;
 
     public List<GameObject> boardPiecesPrefabs;
     public List<GameObject> activePiece;
@@ -45,6 +48,19 @@ public class BoardManager : MonoBehaviour
 
     private void Start()
     {
+        GridSize = 8;
+        if(ClearBoards.won1){
+            level_number+=1;
+        }
+        if(ClearBoards.won2){
+            level_number+=1;
+        }
+        if(ClearBoards.won3){
+            level_number+=1;
+        }
+        if(ClearBoards.won4){
+            level_number+=1;
+        }
         NumOfLevel.leveln = level_number;
         LevelMovesLeft.movesl = 0 + BoardManager.Instance.moves_left;
         //Cursor.lockState = CursorLockMode.None;
@@ -226,6 +242,25 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             foreach ( Marble mar in Marbles)
             {
                 if (mar != null && mar!=selectedMarble) existingOnes.Add(mar);
+                //existingOnes.Reverse();
+            }
+            if (addx == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            }
+            if (addx == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+                existingOnes.Reverse();
+            }
+            if (addy == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+            }
+            if (addy == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+                existingOnes.Reverse();
             }
             foreach (Marble mar in existingOnes)
             {
@@ -260,6 +295,24 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             foreach (Marble mar in Marbles)
             {
                 if (mar != null && mar != selectedMarble) existingOnes.Add(mar);
+            }
+            if (addx == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            }
+            if (addx == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+                existingOnes.Reverse();
+            }
+            if (addy == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+            }
+            if (addy == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+                existingOnes.Reverse();
             }
             foreach (Marble mar in existingOnes)
             {
@@ -320,6 +373,24 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
             foreach (Marble mar in Marbles)
             {
                 if (mar != null && mar != selectedMarble) existingOnes.Add(mar);
+            }
+            if (addx == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+            }
+            if (addx == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentX.CompareTo(b.CurrentX));
+                existingOnes.Reverse();
+            }
+            if (addy == 1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+            }
+            if (addy == -1)
+            {
+                existingOnes.Sort((a, b) => a.CurrentY.CompareTo(b.CurrentY));
+                existingOnes.Reverse();
             }
             foreach (Marble mar in existingOnes)
             {
@@ -388,21 +459,35 @@ public bool isPath(Marble[,] matrix,int fx,int fy, int i,
         BoardHighlights.Instance.HideHighlights();
         selectedMarble = null;
         if(isPath(Marbles,strtx,strty,finx,finy,GridSize)){
+            if(level_number<=5){
+            level_number+=5;
+            GridSize = 10;
+            Switchboard.HideEight();
+            gob.SetActive(true);    
             foreach (GameObject ob in activePiece)
             {
                 Destroy(ob);
             }
-            if (level_number == 5)
+            }
+            else if (level_number == 6)
             {
                 SceneManager.LoadScene(3);
             }
-            else
-            {
+            else if(level_number == 7){
+                SceneManager.LoadScene(4);
+            }
+            else if(level_number == 8){
+                SceneManager.LoadScene(5);
+            }
+            else if(level_number == 9){
+                SceneManager.LoadScene(6);
+            }
+            else if(level_number == 10){
+                SceneManager.LoadScene(7);
+            }
                 LevelMovesLeft.movesl += 111;
-                level_number += 1;
                 NumOfLevel.leveln = level_number;
                 SpawnAllLevel();
-            }
         }
         LevelMovesLeft.movesl = moves_left;
     }

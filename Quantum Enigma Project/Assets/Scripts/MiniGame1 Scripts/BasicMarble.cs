@@ -7,7 +7,7 @@ public class BasicMarble : Marble
    public override bool[,] PossibleMove(){
        int i,j;
        Marble c = null;
-       bool[,] r = new bool[8,8];
+       bool[,] r = new bool[BoardManager.GridSize,BoardManager.GridSize];
        i= CurrentX-1;
        j= CurrentY+1;
         
@@ -22,7 +22,7 @@ public class BasicMarble : Marble
 
             }
        }
-        if(CurrentY != 7){
+        if(CurrentY != (BoardManager.GridSize-1)){
             if (BoardManager.Instance.Marbles[CurrentX, CurrentY+1] != null)
             {
                 c = BoardManager.Instance.Marbles[CurrentX, CurrentY+1];
@@ -43,7 +43,7 @@ public class BasicMarble : Marble
 
             }
        }
-       if(CurrentX != 7){
+       if(CurrentX != (BoardManager.GridSize-1)){
             if (BoardManager.Instance.Marbles[CurrentX + 1, CurrentY] != null)
             {
                 c = BoardManager.Instance.Marbles[CurrentX + 1, CurrentY];

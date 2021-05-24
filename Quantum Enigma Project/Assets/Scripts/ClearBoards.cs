@@ -9,5 +9,7 @@ public class ClearBoards : MonoBehaviour
     public static bool won2 = false;
 
     public static bool won3 = false;
+    public static bool won4 = false;
+    public static bool won5 = false;
 
 }

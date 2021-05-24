@@ -8,14 +8,14 @@ public class DoubleMarble : Marble
     {
         int i, j;
         Marble c = null;
-        bool[,] r = new bool[8, 8];
+        bool[,] r = new bool[(BoardManager.GridSize), (BoardManager.GridSize)];
         i = CurrentX - 1;
         j = CurrentY + 1;
-        if (CurrentY != 7)
+        if (CurrentY != (BoardManager.GridSize-1))
         {
             for (int k = 0; k < 2; k++)
             {
-                if (i >= 0 && i < 8 && j >= 0 && j < 8)
+                if (i >= 0 && i < (BoardManager.GridSize) && j >= 0 && j < (BoardManager.GridSize))
                 {
                     if (BoardManager.Instance.Marbles[i, j] != null)
                     {
@@ -36,7 +36,7 @@ public class DoubleMarble : Marble
         {
             for (int k = 0; k < 2; k++)
             {
-                if (i >= 0 && i < 8 && j >= 0 && j < 8)
+                if (i >= 0 && i < (BoardManager.GridSize) && j >= 0 && j < (BoardManager.GridSize))
                 {
                     if (BoardManager.Instance.Marbles[i, j] != null)
                     {
@@ -63,7 +63,7 @@ public class DoubleMarble : Marble
 
             }
         }
-        if (CurrentX != 7)
+        if (CurrentX != (BoardManager.GridSize-1))
         {
             if (BoardManager.Instance.Marbles[CurrentX + 1, CurrentY] != null)
             {
@@ -82,7 +82,7 @@ public class DoubleMarble : Marble
     public override bool[,] PossibleMove()
     {
         Marble c = null;
-        bool[,] r = new bool[8, 8];
+        bool[,] r = new bool[(BoardManager.GridSize), (BoardManager.GridSize)];
 
         if (CurrentY >= 2)
         {
@@ -96,7 +96,7 @@ public class DoubleMarble : Marble
 
             }
         }
-        if (CurrentY <= 5 )
+        if (CurrentY <= (BoardManager.GridSize-3) )
         {
             if (BoardManager.Instance.Marbles[CurrentX, CurrentY + 2] != null)
             {
@@ -119,7 +119,7 @@ public class DoubleMarble : Marble
 
             }
         }
-        if (CurrentX <= 5)
+        if (CurrentX <= (BoardManager.GridSize-3))
         {
             if (BoardManager.Instance.Marbles[CurrentX + 2, CurrentY] != null)
             {
@@ -143,7 +143,7 @@ public class DoubleMarble : Marble
             }
         }
 
-        if (CurrentX > 0 && CurrentY < 7)
+        if (CurrentX > 0 && CurrentY < (BoardManager.GridSize-1))
         {
             if (BoardManager.Instance.Marbles[CurrentX - 1, CurrentY + 1] != null)
             {
@@ -155,7 +155,7 @@ public class DoubleMarble : Marble
             }
         }
 
-        if (CurrentX < 7 && CurrentY > 0)
+        if (CurrentX < (BoardManager.GridSize-1) && CurrentY > 0)
         {
             if (BoardManager.Instance.Marbles[CurrentX + 1, CurrentY - 1] != null)
             {
@@ -167,7 +167,7 @@ public class DoubleMarble : Marble
             }
         }
 
-        if (CurrentX < 7 && CurrentY < 7)
+        if (CurrentX < (BoardManager.GridSize-1) && CurrentY < (BoardManager.GridSize-1))
         {
             if (BoardManager.Instance.Marbles[CurrentX + 1, CurrentY + 1] != null)
             {
