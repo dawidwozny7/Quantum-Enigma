@@ -1233,7 +1233,7 @@ MonoBehaviour:
   gob: {fileID: 664273180}
   selectedMarble: {fileID: 0}
   moves_left: 100
-  level_number: 5
+  level_number: 1
   boardPiecesPrefabs:
   - {fileID: 2746529135588265864, guid: 5b35403357e4e4e41992c1668afc8d3d, type: 3}
   - {fileID: 5706834383451143387, guid: 05ef931a1e601184a96e57cc18741929, type: 3}
