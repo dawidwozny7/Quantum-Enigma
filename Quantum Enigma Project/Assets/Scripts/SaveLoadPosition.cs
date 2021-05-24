@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class SaveLoadPosition : MonoBehaviour
 {
-    public GameObject player;
     public float x, y, z;
     
+    void Start()
+    {
+
+    }
+
+    void Update()
+    {
+
+    }
+
     public void Save()
     {
         x = transform.position.x;
@@ -20,11 +29,14 @@ public class SaveLoadPosition : MonoBehaviour
 
     public void Load()
     {
-        x = PlayerPrefs.GetFloat("x");
-        y = PlayerPrefs.GetFloat("y");
-        z = PlayerPrefs.GetFloat("z");
+        if (ClearBoards.won1 == true)
+        {
+            x = PlayerPrefs.GetFloat("x");
+            y = PlayerPrefs.GetFloat("y");
+            z = PlayerPrefs.GetFloat("z");
 
-        Vector3 LoadPosition = new Vector3(x, y, z);
-        player.transform.position = LoadPosition;
+            Vector3 LoadPosition = new Vector3(x, y, z);
+            transform.position = LoadPosition;
+        }
     }
 }

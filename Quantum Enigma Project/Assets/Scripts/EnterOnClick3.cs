@@ -6,6 +6,7 @@ public class EnterOnClick3 : MonoBehaviour
 {
     private void OnMouseDown()
     {
+        GameObject.Find("Player").GetComponent<SaveLoadPosition>().Save();
         SceneManager.LoadScene(9);
     }
 }

@@ -34,6 +34,7 @@ public class EndButton : MonoBehaviour
         else{   
         ClearBoards.won1 = true;
         }
+        //GameObject.Find("Player").GetComponent<SaveLoadPosition>().Load();
         SceneManager.LoadScene(1);
-	}
+    }
 }

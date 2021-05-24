@@ -25,9 +25,14 @@ public class PlayerMovement : MonoBehaviour
     bool isMoving;
     float final_speed;
 
-    //void Start()
+    void Start()
+    {
+        GameObject.Find("Player").GetComponent<SaveLoadPosition>().Load();
+    }
+
+    //private void Awake()
     //{
-    //    SaveLoadPosition.Load();
+    //    DontDestroyOnLoad(this);
     //}
 
     void Update()
