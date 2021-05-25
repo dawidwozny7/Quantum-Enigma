@@ -22,13 +22,13 @@ The original plan was to implement three puzzle games that are inspired by quant
 
 - Jenni Hirvonen - Graphics
 
-- Dawid Wozny (https://github.com/dawidwozny7)- Programming and management in programming field
+- Dawid Wozny (https://github.com/dawidwozny7) - Programming and management in programming field
 
-- Aku Tervonen (https://github.com/Terboe)- Programming 
+- Aku Tervonen (https://github.com/Terboe) - Programming 
 
 - Ruda Lamac - Game design, project management and story building
 
-- Dominik Lasinski (https://github.com/Dmkk01)- Programming and Game Design
+- Dominik Lasinski (https://github.com/Dmkk01) - Programming and Game Design
 
 - Rui Wang - Quantum expertise and Programming
 
